@@ -10,4 +10,3 @@ Code accompanying the iicd workshop 2024
 
 - **Github repository**: <https://github.com/anazaret/iicd-workshop-2024/>
 - **Documentation** <https://anazaret.github.io/iicd-workshop-2024/>
-
