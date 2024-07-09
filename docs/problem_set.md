@@ -16,7 +16,7 @@ where $\theta_g$ contains gene specific parameters shared across cells, and $p$ 
 You will implement simple gene model by subclassing the class  `BaseGeneModel` provided
 in the `iicd_workshop_2024` package.
 
-Link to the documentation: [BaseGeneModel](/iicd-workshop-2024/references/#iicd_workshop_2024.gene_model.BaseGeneModel)
+Link to the documentation: [BaseGeneModel](references.md#iicd_workshop_2024.gene_model.BaseGeneModel)
 
 ### 1) Load the data
 
@@ -96,7 +96,7 @@ def plot_learned_vs_empirical_mean(model, adata):
 Visualize a few gene distributions by plotting the learned distributions against the empirical distribution.
 
 You can use the function `plot_gene_distribution` from the `iicd_workshop_2024.gene_model` module.
-See documentation [plot_gene_distribution](/iicd-workshop-2024/references/#iicd_workshop_2024.gene_model.plot_gene_distribution)
+See documentation for [plot_gene_distribution](references.md/#iicd_workshop_2024.gene_model.plot_gene_distribution).
 
 
 ### 3) Now repeat the same steps for a Poisson gene model
