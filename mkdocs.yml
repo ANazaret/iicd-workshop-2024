@@ -10,7 +10,7 @@ copyright: Maintained by <a href="https://anazaret.com">Florian</a>.
 nav:
   - Home: index.md
   - Problem set: problem_set.md
-  - References: references.md
+  - API Reference: references.md
 plugins:
   - search
   - mkdocstrings:
