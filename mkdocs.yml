@@ -10,7 +10,7 @@ copyright: Maintained by <a href="https://anazaret.com">Florian</a>.
 nav:
   - Home: index.md
   - Problem set: problem_set.md
-  - Modules: modules.md
+  - References: references.md
 plugins:
   - search
   - mkdocstrings:
@@ -23,6 +23,8 @@ theme:
   name: material
   feature:
     tabs: true
+  features:
+    - content.code.copy
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -41,6 +43,7 @@ theme:
   icon:
     repo: fontawesome/brands/github
 
+
 extra:
   social:
     - icon: fontawesome/brands/github
@@ -53,6 +56,13 @@ markdown_extensions:
       permalink: true
   - pymdownx.arithmatex:
       generic: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
 
 extra_javascript:
   - javascripts/katex.js
