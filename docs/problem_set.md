@@ -8,12 +8,11 @@ In this problem set, we will explore probabilistic modeling on scRNA-sequencing 
 ## Problem 1 - Simple model with global gene parameters
 
 In this problem, you will implement simple models with global gene parameters.
-Assume that for each cell $i$ and gene $g$, the gene expression $x_{i,g}$ is distributed according to a
-distribution
+For each cell $i$ and gene $g$, assume that the gene expression $x_{i,g}$ follows a distribution
 $$ x_{i,g} \sim p(\theta_g) $$
 where $\theta_g$ contains gene specific parameters shared across cells, and $p$ is a distribution (e.g. Normal, Negative Binomial).
 
-You will implement simple gene model by subclassing the class  `BaseGeneModel` provided
+You will implement simple gene model by subclassing the `BaseGeneModel` class provided
 in the `iicd_workshop_2024` package.
 
 Link to the documentation: [BaseGeneModel](references.md#iicd_workshop_2024.gene_model.BaseGeneModel)
@@ -68,11 +67,13 @@ You should use the `dist.Normal` class from `torch.distributions` to create the 
 
 Fit the model to the data using the `fit` method.
 
-#### 2.5) Visualize the learned distributions
+#### 2.5) Visualize the learned means
 
-- Visualize the learned gene means against the true empirical gene means.
-- Are they the same? Do you have any ideas why they might differ?
-- If they differ and you have an idea why, can you fix it?
+Visualize the learned gene means against the true empirical gene means.
+
+- Are they the same?
+- If not, can you hypothesize reasons for any differences?
+- And can you fix it?
 
 To visualize the gene means, you can use the following code snippet:
 ```python
@@ -154,8 +155,18 @@ where:
 - $\rho$ is the prior distribution of the gene specific parameters
 - $f$ is a function that transforms the cell specific representation into the gene specific parameters.
 
-For this problem, we set:
+For this problem, we define:
 
-- the family of distributions $p$ to be a negative binomial distributions
+- the family of distributions $p$ to be negative binomial distributions
 - the prior distribution of the gene specific parameters $\rho$ to be uniform
 - the prior distribution of the cell specific representations $\pi$ to be a standard normal distribution.
+
+We further will use amortized inference to learn the cell specific representations $z_i$.
+$$z_i \approx g(x_i),$$
+where $g$ is a neural network that takes the gene expression $x_i$ as input and outputs the cell specific representation $z_i$.
+
+### 1) Implement the auto-encoder model
+
+Implement the auto-encoder model by subclassing the `BaseGeneModel` class.
+
+```python
