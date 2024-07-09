@@ -152,6 +152,20 @@ class BaseGeneModel(abc.ABC, torch.nn.Module):
 
 
 def plot_gene_distribution(model: BaseGeneModel, adata, genes, n_cols=3):
+    """
+    Plot the learned distributions and the empirical distributions of the genes.
+
+    Parameters
+    ----------
+    model: BaseGeneModel
+        The gene model.
+    adata: AnnData
+        The annotated data matrix.
+    genes: list[str]
+        The list of genes to plot.
+    n_cols: int
+        The number of columns in the plot.
+    """
     n_rows = int(np.ceil(len(genes) / n_cols))
     fig, axs = plt.subplots(n_rows, n_cols, figsize=(n_cols * 4, n_rows * 3), squeeze=False)
     for i, gene in enumerate(genes):
