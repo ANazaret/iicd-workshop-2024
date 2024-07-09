@@ -3,7 +3,7 @@ Wednesday, 2024-07-10
 
 ---
 
-In this problem set, we will explore probabilistic modeling on scRNA-sequencing data.
+In this problem set, we explore probabilistic modeling on scRNA-sequencing data.
 
 ## Problem 1 - Simple model with global gene parameters
 
@@ -167,6 +167,20 @@ where $g$ is a neural network that takes the gene expression $x_i$ as input and 
 
 ### 1) Implement the auto-encoder model
 
-Implement the auto-encoder model by subclassing the `BaseGeneModel` class.
+Implement the auto-encoder model by completing the following class.
 
 ```python
+import torch
+
+
+class LatentModel(torch.nn.Module):
+    def __init__(self, n_genes: int, n_latent: int):
+        super().__init__()
+        ...
+
+    def forward(self, x):
+       ...
+
+    def loss(self, data):
+        return -self.forward(data).log_prob(data).mean()
+```
