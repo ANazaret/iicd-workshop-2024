@@ -356,54 +356,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-implement-the-get_mean-method" class="md-nav__link">
+  <a href="#21-implement-the-__init__-and-the-get_distribution-methods" class="md-nav__link">
     <span class="md-ellipsis">
-      2.1) Implement the get_mean method
+      2.1) Implement the __init__ and the get_distribution methods
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-implement-the-get_std-method" class="md-nav__link">
+  <a href="#22-fit-the-model" class="md-nav__link">
     <span class="md-ellipsis">
-      2.2) Implement the get_std method
+      2.2) Fit the model
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-implement-the-get_distribution-method" class="md-nav__link">
+  <a href="#23-visualize-the-learned-means" class="md-nav__link">
     <span class="md-ellipsis">
-      2.3) Implement the get_distribution method
+      2.3) Visualize the learned means
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-fit-the-model" class="md-nav__link">
+  <a href="#24-visualize-a-few-gene-distributions" class="md-nav__link">
     <span class="md-ellipsis">
-      2.4) Fit the model
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#25-visualize-the-learned-means" class="md-nav__link">
-    <span class="md-ellipsis">
-      2.5) Visualize the learned means
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#26-visualize-a-few-gene-distributions" class="md-nav__link">
-    <span class="md-ellipsis">
-      2.6) Visualize a few gene distributions
+      2.4) Visualize a few gene distributions
     </span>
   </a>
   
@@ -457,9 +439,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-fit-the-auto-encoder-model" class="md-nav__link">
+  <a href="#2-fit-the-model" class="md-nav__link">
     <span class="md-ellipsis">
-      2) Fit the auto-encoder model
+      2) Fit the model
     </span>
   </a>
   
@@ -590,54 +572,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-implement-the-get_mean-method" class="md-nav__link">
+  <a href="#21-implement-the-__init__-and-the-get_distribution-methods" class="md-nav__link">
     <span class="md-ellipsis">
-      2.1) Implement the get_mean method
+      2.1) Implement the __init__ and the get_distribution methods
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-implement-the-get_std-method" class="md-nav__link">
+  <a href="#22-fit-the-model" class="md-nav__link">
     <span class="md-ellipsis">
-      2.2) Implement the get_std method
+      2.2) Fit the model
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-implement-the-get_distribution-method" class="md-nav__link">
+  <a href="#23-visualize-the-learned-means" class="md-nav__link">
     <span class="md-ellipsis">
-      2.3) Implement the get_distribution method
+      2.3) Visualize the learned means
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-fit-the-model" class="md-nav__link">
+  <a href="#24-visualize-a-few-gene-distributions" class="md-nav__link">
     <span class="md-ellipsis">
-      2.4) Fit the model
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#25-visualize-the-learned-means" class="md-nav__link">
-    <span class="md-ellipsis">
-      2.5) Visualize the learned means
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#26-visualize-a-few-gene-distributions" class="md-nav__link">
-    <span class="md-ellipsis">
-      2.6) Visualize a few gene distributions
+      2.4) Visualize a few gene distributions
     </span>
   </a>
   
@@ -691,9 +655,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-fit-the-auto-encoder-model" class="md-nav__link">
+  <a href="#2-fit-the-model" class="md-nav__link">
     <span class="md-ellipsis">
-      2) Fit the auto-encoder model
+      2) Fit the model
     </span>
   </a>
   
@@ -766,8 +730,9 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>iicd-workshop<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>conda<span class="w"> </span>activate<span class="w"> </span>iicd-workshop
 </span></code></pre></div></p>
-<p>Before starting, make sure the <code>iicd-workshop-2024</code> package is installed.
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>iicd-workshop-2024
+<p>Before starting, make sure the <code>iicd-workshop-2024</code> package is installed, and that you have the
+latest version of it.
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>iicd-workshop-2024<span class="w"> </span>--upgrade
 </span></code></pre></div></p>
 <p>As well as other dependencies:
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pip<span class="w"> </span>install<span class="w"> </span>scvi-tools<span class="w"> </span>torch<span class="w"> </span>scanpy<span class="w"> </span>seaborn<span class="w"> </span>matplotlib
@@ -777,13 +742,6 @@
 For each cell <span class="arithmatex">\(i\)</span> and gene <span class="arithmatex">\(g\)</span>, assume that the gene expression <span class="arithmatex">\(x_{i,g}\)</span> follows a distribution
 $$ x_{i,g} \sim p(\theta_g) $$
 where <span class="arithmatex">\(\theta_g\)</span> contains gene specific parameters shared across cells, and <span class="arithmatex">\(p\)</span> is a distribution (e.g. Normal, Negative Binomial).</p>
-<p>You will implement simple gene model by subclassing the <code>BaseGeneModel</code> class provided
-in the <code>iicd_workshop_2024</code> package.</p>
-<p>Link to the documentation: <a href="../references/#iicd_workshop_2024.gene_model.BaseGeneModel">BaseGeneModel</a>
-Note: the instance function <code>fit</code> simply calls a helper function, <a href="../references/#iicd_workshop_2024.inference.fit">fit</a>,
-which loads data from the AnnData object and runs a training loop. This is already implemented for you.</p>
-<p>You can use the Distribution classes from <code>torch.distributions</code>.
-Available here: <a href="https://pytorch.org/docs/stable/distributions.html">torch.distributions</a>.</p>
 <h3 id="1-load-the-data">1) Load the data<a class="headerlink" href="#1-load-the-data" title="Permanent link">&para;</a></h3>
 <p>Load public scRNA-seq data <code>pbmc</code> from the <code>scvi-tools</code> package.
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span> <span class="nn">scvi</span>
@@ -794,33 +752,33 @@ Available here: <a href="https://pytorch.org/docs/stable/distributions.html">tor
 <p>In this question, assume that
 $$ x_{i,g} \sim \mathcal{N}(\mu_g, \sigma_g^2) $$
 where <span class="arithmatex">\(\mu_g\)</span> and <span class="arithmatex">\(\sigma_g\)</span> are gene specific parameters shared across cells.</p>
-<p>Subclass the <code>BaseGeneModel</code> class to implement Normal gene model.</p>
+<p>You will implement simple gene model by subclassing the <code>BaseGeneModel</code> class provided
+in the <code>iicd_workshop_2024</code> package. Link to the documentation: <a href="../references/#iicd_workshop_2024.gene_model.BaseGeneModel">BaseGeneModel</a>
+This class already implements the <code>fit</code> and <code>loss</code> methods for you.
+You just need to implement the <code>get_distribution</code> method that returns the distribution of the model,
+as well as the <code>__init__</code> method that initializes the model.</p>
+<p>Here is a template for the <code>NormalGeneModel</code> class:
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span> <span class="nn">torch.distributions</span> <span class="k">as</span> <span class="nn">dist</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">from</span> <span class="nn">iicd_workshop_2024.gene_model</span> <span class="kn">import</span> <span class="n">BaseGeneModel</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="k">class</span> <span class="nc">NormalGeneModel</span><span class="p">(</span><span class="n">BaseGeneModel</span><span class="p">):</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="k">def</span> <span class="nf">get_mean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gene_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="k">return</span> <span class="o">...</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="k">def</span> <span class="nf">get_std</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gene_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>        <span class="k">return</span> <span class="o">...</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="k">def</span> <span class="nf">get_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gene_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dist</span><span class="o">.</span><span class="n">Distribution</span><span class="p">:</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_genes</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">n_genes</span><span class="p">)</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="c1"># declare any parameters here, using torch.nn.Parameter</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="o">...</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    <span class="k">def</span> <span class="nf">get_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gene_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dist</span><span class="o">.</span><span class="n">Distribution</span><span class="p">:</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>        <span class="c1"># return the distribution for the gene_idx-th gene</span>
 </span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        <span class="k">return</span> <span class="o">...</span>
-</span></code></pre></div>
-<h4 id="21-implement-the-get_mean-method">2.1) Implement the <code>get_mean</code> method<a class="headerlink" href="#21-implement-the-get_mean-method" title="Permanent link">&para;</a></h4>
-<p>Look at the documentation for what the <a href="../references/#iicd_workshop_2024.gene_model.BaseGeneModel.get_mean">get_mean</a> method
-should return.</p>
-<h4 id="22-implement-the-get_std-method">2.2) Implement the <code>get_std</code> method<a class="headerlink" href="#22-implement-the-get_std-method" title="Permanent link">&para;</a></h4>
-<p>Look at the documentation for the <a href="../references/#iicd_workshop_2024.gene_model.BaseGeneModel.get_std">get_std</a> method
-should return.</p>
-<h4 id="23-implement-the-get_distribution-method">2.3) Implement the <code>get_distribution</code> method<a class="headerlink" href="#23-implement-the-get_distribution-method" title="Permanent link">&para;</a></h4>
-<p>You should use the <code>dist.Normal</code> class from <code>torch.distributions</code> to create the distribution object.</p>
-<h4 id="24-fit-the-model">2.4) Fit the model<a class="headerlink" href="#24-fit-the-model" title="Permanent link">&para;</a></h4>
-<p>Fit the model to the data using the <code>fit</code> method.
+</span></code></pre></div></p>
+<h4 id="21-implement-the-__init__-and-the-get_distribution-methods">2.1) Implement the <code>__init__</code> and the <code>get_distribution</code> methods<a class="headerlink" href="#21-implement-the-__init__-and-the-get_distribution-methods" title="Permanent link">&para;</a></h4>
+<p>You should use the <code>dist.Normal</code> class from <code>torch.distributions</code> to create the distribution object.
+Here is the documentation for <a href="https://pytorch.org/docs/stable/distributions.html">torch.distributions</a>.</p>
+<h4 id="22-fit-the-model">2.2) Fit the model<a class="headerlink" href="#22-fit-the-model" title="Permanent link">&para;</a></h4>
+<p>Fit the model to the data using the <code>fit</code> method of the <code>NormalGeneModel</code> class.
 We recommend you to read the documentation and source code for the <a href="../references/#iicd_workshop_2024.inference.fit">fit</a> method.</p>
-<h4 id="25-visualize-the-learned-means">2.5) Visualize the learned means<a class="headerlink" href="#25-visualize-the-learned-means" title="Permanent link">&para;</a></h4>
+<h4 id="23-visualize-the-learned-means">2.3) Visualize the learned means<a class="headerlink" href="#23-visualize-the-learned-means" title="Permanent link">&para;</a></h4>
 <p>Visualize the learned gene means against the true empirical gene means.</p>
 <ul>
 <li>Are they the same?</li>
@@ -842,7 +800,7 @@ We recommend you to read the documentation and source code for the <a href="../r
 </span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Learned mean&quot;</span><span class="p">)</span>
 </span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></code></pre></div></p>
-<h4 id="26-visualize-a-few-gene-distributions">2.6) Visualize a few gene distributions<a class="headerlink" href="#26-visualize-a-few-gene-distributions" title="Permanent link">&para;</a></h4>
+<h4 id="24-visualize-a-few-gene-distributions">2.4) Visualize a few gene distributions<a class="headerlink" href="#24-visualize-a-few-gene-distributions" title="Permanent link">&para;</a></h4>
 <p>Visualize a few gene distributions by plotting the learned distributions against the empirical distribution.
 For example, genes: <code>["CD14", "CD74", "RPS27"]</code>.</p>
 <p>You can use the function <code>plot_gene_distribution</code> from the <code>iicd_workshop_2024.gene_model</code> module.
@@ -884,16 +842,9 @@ $$
 x_{i,g} &amp;\sim p(f(z_i), \theta_g)
 \end{align}
 $$
-where:</p>
-<ul>
-<li><span class="arithmatex">\(f\)</span> is a function that transforms the cell specific representation into the gene specific parameters.</li>
-</ul>
-<p>For this problem, we define:</p>
-<ul>
-<li>the family of distributions <span class="arithmatex">\(p\)</span> to be negative binomial distributions</li>
-<li>the prior distribution of the gene specific parameters <span class="arithmatex">\(\rho\)</span> to be uniform</li>
-<li>the prior distribution of the cell specific representations <span class="arithmatex">\(\pi\)</span> to be a standard normal distribution.</li>
-</ul>
+where:
+<span class="arithmatex">\(f\)</span> is a function that transforms the cell specific representation into the gene specific parameters.</p>
+<p>For this problem, we define the family of distributions <span class="arithmatex">\(p\)</span> to be negative binomial distributions</p>
 <p>We further will use amortized inference to learn the cell specific representations <span class="arithmatex">\(z_i\)</span>.
 $$ z_i \approx g(x_i), $$
 where <span class="arithmatex">\(g\)</span> is a neural network that takes the gene expression <span class="arithmatex">\(x_i\)</span> as input and outputs the cell specific representation <span class="arithmatex">\(z_i\)</span>.</p>
@@ -909,7 +860,7 @@ as is done in the <a href="../references/#iicd_workshop_2024.gene_model.BaseGene
 </span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 </span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        <span class="o">...</span>
 </span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="k">def</span> <span class="nf">get_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
 </span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>       <span class="o">...</span>
 </span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
 </span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>    <span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
@@ -919,7 +870,7 @@ as is done in the <a href="../references/#iicd_workshop_2024.gene_model.BaseGene
 class from the <code>iicd_workshop_2024.neural_network</code> module to define the neural network.
 <div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span> <span class="nn">iicd_workshop_2024.neural_network</span> <span class="kn">import</span> <span class="n">DenseNN</span>
 </span></code></pre></div></p>
-<h3 id="2-fit-the-auto-encoder-model">2) Fit the auto-encoder model<a class="headerlink" href="#2-fit-the-auto-encoder-model" title="Permanent link">&para;</a></h3>
+<h3 id="2-fit-the-model">2) Fit the model<a class="headerlink" href="#2-fit-the-model" title="Permanent link">&para;</a></h3>
 <p>You can use the <code>fit</code> function from the <code>iicd_workshop_2024.inference</code> module to fit the model.</p>
 <h3 id="3-implement-a-get_latent_representation-method">3) Implement a <code>get_latent_representation</code> method<a class="headerlink" href="#3-implement-a-get_latent_representation-method" title="Permanent link">&para;</a></h3>
 <p>This function should be able to retrieve the latent vectors <code>z</code> for any given <code>x</code> input.</p>
