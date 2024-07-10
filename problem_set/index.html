@@ -456,8 +456,53 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#2-fit-the-auto-encoder-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      2) Fit the auto-encoder model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-implement-a-get_latent_representation-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      3) Implement a get_latent_representation method
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-visualize-the-learned-cell-specific-representations-using-umap" class="md-nav__link">
+    <span class="md-ellipsis">
+      4) Visualize the learned cell specific representations using UMAP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-compare-against-decipher" class="md-nav__link">
+    <span class="md-ellipsis">
+      5) Compare against Decipher
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-3-implement-your-own-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem 3 - Implement your own model
+    </span>
+  </a>
   
 </li>
       
@@ -645,8 +690,53 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#2-fit-the-auto-encoder-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      2) Fit the auto-encoder model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-implement-a-get_latent_representation-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      3) Implement a get_latent_representation method
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-visualize-the-learned-cell-specific-representations-using-umap" class="md-nav__link">
+    <span class="md-ellipsis">
+      4) Visualize the learned cell specific representations using UMAP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-compare-against-decipher" class="md-nav__link">
+    <span class="md-ellipsis">
+      5) Compare against Decipher
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-3-implement-your-own-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem 3 - Implement your own model
+    </span>
+  </a>
   
 </li>
       
@@ -672,6 +762,9 @@
 <p>Wednesday, 2024-07-10</p>
 <hr />
 <p>In this problem set, we explore probabilistic modeling on scRNA-sequencing data.</p>
+<p>Before starting, make sure the <code>iicd-workshop-2024</code> package is installed.
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>iicd-workshop-2024
+</span></code></pre></div></p>
 <h2 id="problem-1-simple-model-with-global-gene-parameters">Problem 1 - Simple model with global gene parameters<a class="headerlink" href="#problem-1-simple-model-with-global-gene-parameters" title="Permanent link">&para;</a></h2>
 <p>In this problem, you will implement simple models with global gene parameters.
 For each cell <span class="arithmatex">\(i\)</span> and gene <span class="arithmatex">\(g\)</span>, assume that the gene expression <span class="arithmatex">\(x_{i,g}\)</span> follows a distribution
@@ -679,35 +772,37 @@ $$ x_{i,g} \sim p(\theta_g) $$
 where <span class="arithmatex">\(\theta_g\)</span> contains gene specific parameters shared across cells, and <span class="arithmatex">\(p\)</span> is a distribution (e.g. Normal, Negative Binomial).</p>
 <p>You will implement simple gene model by subclassing the <code>BaseGeneModel</code> class provided
 in the <code>iicd_workshop_2024</code> package.</p>
-<p>Link to the documentation: <a href="../references/#iicd_workshop_2024.gene_model.BaseGeneModel">BaseGeneModel</a></p>
+<p>Link to the documentation: <a href="../references/#iicd_workshop_2024.gene_model.BaseGeneModel">BaseGeneModel</a>
+Note: the instance function <code>fit</code> simply calls a helper function, <a href="../references/#iicd_workshop_2024.inference.fit">fit</a>,
+which loads data from the AnnData object and runs a training loop. This is already implemented for you.</p>
 <h3 id="1-load-the-data">1) Load the data<a class="headerlink" href="#1-load-the-data" title="Permanent link">&para;</a></h3>
 <p>Load public scRNA-seq data <code>pbmc</code> from the <code>scvi-tools</code> package.
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">scvi</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">adata</span> <span class="o">=</span> <span class="n">scvi</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">pbmc_dataset</span><span class="p">()</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span> <span class="nn">scvi</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">adata</span> <span class="o">=</span> <span class="n">scvi</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">pbmc_dataset</span><span class="p">()</span>
 </span></code></pre></div></p>
 <h3 id="2-implement-a-simple-normal-gene-model">2) Implement a simple Normal gene model<a class="headerlink" href="#2-implement-a-simple-normal-gene-model" title="Permanent link">&para;</a></h3>
 <p>In this question, assume that
 $$ x_{i,g} \sim \mathcal{N}(\mu_g, \sigma_g^2) $$
 where <span class="arithmatex">\(\mu_g\)</span> and <span class="arithmatex">\(\sigma_g\)</span> are gene specific parameters shared across cells.</p>
 <p>Subclass the <code>BaseGeneModel</code> class to implement Normal gene model.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span> <span class="nn">torch.distributions</span> <span class="k">as</span> <span class="nn">dist</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span> <span class="nn">iicd_workshop_2024.gene_model</span> <span class="kn">import</span> <span class="n">BaseGeneModel</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="k">class</span> <span class="nc">NormalGeneModel</span><span class="p">(</span><span class="n">BaseGeneModel</span><span class="p">):</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="k">def</span> <span class="nf">get_mean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gene_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="k">if</span> <span class="n">gene_idx</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>            <span class="n">gene_idx</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="k">return</span> <span class="o">...</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="k">def</span> <span class="nf">get_std</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gene_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        <span class="k">if</span> <span class="n">gene_idx</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>            <span class="n">gene_idx</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>        <span class="k">return</span> <span class="o">...</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    <span class="k">def</span> <span class="nf">get_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gene_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dist</span><span class="o">.</span><span class="n">Distribution</span><span class="p">:</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>        <span class="k">return</span> <span class="o">...</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span> <span class="nn">torch.distributions</span> <span class="k">as</span> <span class="nn">dist</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span> <span class="nn">iicd_workshop_2024.gene_model</span> <span class="kn">import</span> <span class="n">BaseGeneModel</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">class</span> <span class="nc">NormalGeneModel</span><span class="p">(</span><span class="n">BaseGeneModel</span><span class="p">):</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="k">def</span> <span class="nf">get_mean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gene_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="k">if</span> <span class="n">gene_idx</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>            <span class="n">gene_idx</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="k">return</span> <span class="o">...</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="k">def</span> <span class="nf">get_std</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gene_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        <span class="k">if</span> <span class="n">gene_idx</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>            <span class="n">gene_idx</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>        <span class="k">return</span> <span class="o">...</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    <span class="k">def</span> <span class="nf">get_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gene_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dist</span><span class="o">.</span><span class="n">Distribution</span><span class="p">:</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>        <span class="k">return</span> <span class="o">...</span>
 </span></code></pre></div>
 <h4 id="21-implement-the-get_mean-method">2.1) Implement the <code>get_mean</code> method<a class="headerlink" href="#21-implement-the-get_mean-method" title="Permanent link">&para;</a></h4>
 <h4 id="22-implement-the-get_std-method">2.2) Implement the <code>get_std</code> method<a class="headerlink" href="#22-implement-the-get_std-method" title="Permanent link">&para;</a></h4>
@@ -723,19 +818,19 @@ where <span class="arithmatex">\(\mu_g\)</span> and <span class="arithmatex">\(\
 <li>And can you fix it?</li>
 </ul>
 <p>To visualize the gene means, you can use the following code snippet:
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">def</span> <span class="nf">plot_learned_vs_empirical_mean</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">adata</span><span class="p">):</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">empirical_means</span> <span class="o">=</span> <span class="o">...</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">learned_means</span> <span class="o">=</span> <span class="o">...</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">empirical_means</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">learned_means</span><span class="p">)</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="n">max_value</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">empirical_means</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">learned_means</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_value</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_value</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Empirical mean&quot;</span><span class="p">)</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Learned mean&quot;</span><span class="p">)</span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">def</span> <span class="nf">plot_learned_vs_empirical_mean</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">adata</span><span class="p">):</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="n">empirical_means</span> <span class="o">=</span> <span class="o">...</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="n">learned_means</span> <span class="o">=</span> <span class="o">...</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">empirical_means</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">learned_means</span><span class="p">)</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="n">max_value</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">empirical_means</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">learned_means</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_value</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_value</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Empirical mean&quot;</span><span class="p">)</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Learned mean&quot;</span><span class="p">)</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></code></pre></div></p>
 <h4 id="26-visualize-a-few-gene-distributions">2.6) Visualize a few gene distributions<a class="headerlink" href="#26-visualize-a-few-gene-distributions" title="Permanent link">&para;</a></h4>
 <p>Visualize a few gene distributions by plotting the learned distributions against the empirical distribution.</p>
@@ -796,24 +891,48 @@ where:</p>
 <li>the prior distribution of the cell specific representations <span class="arithmatex">\(\pi\)</span> to be a standard normal distribution.</li>
 </ul>
 <p>We further will use amortized inference to learn the cell specific representations <span class="arithmatex">\(z_i\)</span>.
-<span class="arithmatex">\(<span class="arithmatex">\(z_i \approx g(x_i),\)</span>\)</span>
+$$ z_i \approx g(x_i), $$
 where <span class="arithmatex">\(g\)</span> is a neural network that takes the gene expression <span class="arithmatex">\(x_i\)</span> as input and outputs the cell specific representation <span class="arithmatex">\(z_i\)</span>.</p>
 <h3 id="1-implement-the-auto-encoder-model">1) Implement the auto-encoder model<a class="headerlink" href="#1-implement-the-auto-encoder-model" title="Permanent link">&para;</a></h3>
-<p>Implement the auto-encoder model by completing the following class.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span> <span class="nn">torch</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="k">class</span> <span class="nc">LatentModel</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_genes</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n_latent</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="o">...</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>       <span class="o">...</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>        <span class="k">return</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-</span></code></pre></div>
+<p>Implement the auto-encoder model by completing the following class.
+You may use the <a href="../references/#iicd_workshop_2024.inference.fit">fit</a> function to train the model
+as is done in the <a href="../references/#iicd_workshop_2024.gene_model.BaseGeneModel">BaseGeneModel</a>.
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span> <span class="nn">torch</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="k">class</span> <span class="nc">LatentModel</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_genes</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n_latent</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="o">...</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>       <span class="o">...</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        <span class="k">return</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</span></code></pre></div></p>
+<h3 id="2-fit-the-auto-encoder-model">2) Fit the auto-encoder model<a class="headerlink" href="#2-fit-the-auto-encoder-model" title="Permanent link">&para;</a></h3>
+<p>You can use the <code>fit</code> function from the <code>iicd_workshop_2024.inference</code> module to fit the model.</p>
+<h3 id="3-implement-a-get_latent_representation-method">3) Implement a <code>get_latent_representation</code> method<a class="headerlink" href="#3-implement-a-get_latent_representation-method" title="Permanent link">&para;</a></h3>
+<p>This function should be able to retrieve the latent vectors <code>z</code> for any given <code>x</code> input.</p>
+<h3 id="4-visualize-the-learned-cell-specific-representations-using-umap">4) Visualize the learned cell specific representations using UMAP<a class="headerlink" href="#4-visualize-the-learned-cell-specific-representations-using-umap" title="Permanent link">&para;</a></h3>
+<p>You can use <code>scanpy</code> to visualize the learned cell specific representations using UMAP.
+Does the latent space appear coherent? Can you validate whether the latent space preserves any prior annotations expected to dominate the signal?</p>
+<h3 id="5-compare-against-decipher">5) Compare against Decipher<a class="headerlink" href="#5-compare-against-decipher" title="Permanent link">&para;</a></h3>
+<p>We would now like to see how our simple autoencoder model compares to Decipher.</p>
+<p>Follow instructions <a href="https://github.com/azizilab/decipher?tab=readme-ov-file#readme">here</a> to install Decipher.
+You should be able to train the model and retrieve a similar latent representation.
+Visualize this representation and compare it against the one from your autoencoder. How do they differ?</p>
+<p>Optional:</p>
+<ul>
+<li>Decode a series of points across a data-dense region of the latent representations of the auto-encoder and Decipher.</li>
+<li>Then, for each gene (or a select few genes), plot the trend in gene expression values corresponding to the series of points.</li>
+<li>Do they appear smooth or discontinuous?</li>
+<li>Are there correlations between certain genes?</li>
+<li>Are there sudden shifts in gene expression that correspond with annotation changes?</li>
+</ul>
+<h2 id="problem-3-implement-your-own-model">Problem 3 - Implement your own model<a class="headerlink" href="#problem-3-implement-your-own-model" title="Permanent link">&para;</a></h2>
+<p>Now you can implement your own model on your own data. Good luck!</p>
 
 
 
@@ -843,7 +962,7 @@ where <span class="arithmatex">\(g\)</span> is a neural network that takes the g
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Maintained by <a href="https://anazaret.com">Florian</a>.
+      Maintained by <a href="https://github.com/ANazaret">Achille</a>.
     </div>
   
   
