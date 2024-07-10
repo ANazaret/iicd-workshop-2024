@@ -5,6 +5,11 @@ Wednesday, 2024-07-10
 
 In this problem set, we explore probabilistic modeling on scRNA-sequencing data.
 
+Before starting, make sure the `iicd-workshop-2024` package is installed.
+```bash
+pip install iicd-workshop-2024
+```
+
 ## Problem 1 - Simple model with global gene parameters
 
 In this problem, you will implement simple models with global gene parameters.
@@ -188,14 +193,17 @@ class LatentModel(torch.nn.Module):
         return -self.forward(data).log_prob(data).mean()
 ```
 
-### 2) Implement a `get_latent_representation` method
+### 2) Fit the auto-encoder model
+You can use the `fit` function from the `iicd_workshop_2024.inference` module to fit the model.
+
+### 3) Implement a `get_latent_representation` method
 This function should be able to retrieve the latent vectors `z` for any given `x` input. 
 
-### 3) Visualize the latent representation
-Use your favorite visualization method (e.g., PCA, UMAP, T-SNE).
+### 4) Visualize the learned cell specific representations using UMAP
+You can use `scanpy` to visualize the learned cell specific representations using UMAP.
 Does the latent space appear coherent? Can you validate whether the latent space preserves any prior annotations expected to dominate the signal?
 
-### 4) Compare against Decipher
+### 5) Compare against Decipher
 We would now like to see how our simple autoencoder model stacks up against Decipher.
 
 Follow instructions [here](https://github.com/azizilab/decipher?tab=readme-ov-file#readme) to install and run Decipher
