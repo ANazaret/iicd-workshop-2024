@@ -5,7 +5,7 @@ site_description: Code accompanying the iicd workshop 2024
 site_author: Achille Nazaret
 edit_uri: edit/main/docs/
 repo_name: anazaret/iicd-workshop-2024
-copyright: Maintained by <a href="https://anazaret.com">Florian</a>.
+copyright: Maintained by <a href="https://github.com/ANazaret">Achille</a>.
 
 nav:
   - Home: index.md
