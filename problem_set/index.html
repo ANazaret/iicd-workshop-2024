@@ -782,6 +782,8 @@ in the <code>iicd_workshop_2024</code> package.</p>
 <p>Link to the documentation: <a href="../references/#iicd_workshop_2024.gene_model.BaseGeneModel">BaseGeneModel</a>
 Note: the instance function <code>fit</code> simply calls a helper function, <a href="../references/#iicd_workshop_2024.inference.fit">fit</a>,
 which loads data from the AnnData object and runs a training loop. This is already implemented for you.</p>
+<p>You can use the Distribution classes from <code>torch.distributions</code>.
+Available here: <a href="https://pytorch.org/docs/stable/distributions.html">torch.distributions</a>.</p>
 <h3 id="1-load-the-data">1) Load the data<a class="headerlink" href="#1-load-the-data" title="Permanent link">&para;</a></h3>
 <p>Load public scRNA-seq data <code>pbmc</code> from the <code>scvi-tools</code> package.
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span> <span class="nn">scvi</span>
