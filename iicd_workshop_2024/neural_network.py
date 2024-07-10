@@ -5,16 +5,11 @@ class DenseNN(torch.nn.Module):
     """
     A simple feedforward neural network with ReLU activation function.
 
-    Parameters
-    ----------
-    n_input : int
-        The number of input features.
-    n_output : int
-        The number of output features.
-    n_hidden : int
-        The number of hidden units in each hidden layer.
-    n_layers : int
-        The number of hidden layers
+    Args:
+        n_input (int): The number of input features.
+        n_output (int): The number of output features.
+        n_hidden (int): The number of hidden units in each hidden layer.
+        n_layers (int): The number of hidden layers.
     """
 
     def __init__(self, n_input: int, n_output: int, n_hidden: int = 128, n_layers: int = 1):

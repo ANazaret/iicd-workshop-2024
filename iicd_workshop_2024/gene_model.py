@@ -13,6 +13,14 @@ class BaseGeneModel(abc.ABC, torch.nn.Module):
     """
     Base class for modeling the expression of gene expression using distributions with
     gene-specific parameters that are shared across cells.
+
+    Args:
+        n_genes (int): The number of genes to model.
+
+    Attributes:
+        _mean (torch.nn.Parameter): The mean parameter for each gene.
+        _std (torch.nn.Parameter): The standard deviation parameter for each gene.
+        _inverse_dispersion (torch.nn.Parameter): The inverse dispersion parameter for each gene.
     """
 
     def __init__(self, n_genes):
@@ -32,17 +40,12 @@ class BaseGeneModel(abc.ABC, torch.nn.Module):
         """
         Get the mean parameter of the distributions of gene.
         The method is used for Gaussian, Poisson, and negative binomial distributions.
+        Args:
+            gene_idx (int or list[int] or None): If None, return the mean parameter of all genes.
+                Otherwise, return the mean parameter of the specified gene or list of genes (given by their indices).
 
-        Parameters
-        ----------
-        gene_idx: int or list[int] or None
-            If None, return the mean parameter of all genes. Otherwise, return the mean parameter
-            of the specified gene or list of genes (given by their indices).
-
-        Returns
-        -------
-        torch.Tensor or list[torch.Tensor]
-            The mean parameter of the distribution(s) of the gene(s).
+        Returns:
+            torch.Tensor or list[torch.Tensor]: The mean parameter of the distribution(s) of the gene(s).
         """
         raise NotImplementedError
 
@@ -51,16 +54,12 @@ class BaseGeneModel(abc.ABC, torch.nn.Module):
         Get the standard deviation parameter of the distributions of gene.
         The method is used for Gaussian distributions.
 
-        Parameters
-        ----------
-        gene_idx: int or list[int] or None
-            If None, return the standard deviation parameter of all genes. Otherwise, return the standard deviation parameter
-            of the specified gene or list of genes (given by their indices).
+        Args:
+            gene_idx (int or list[int] or None): If None, return the standard deviation parameter of all genes.
+                Otherwise, return the standard deviation parameter of the specified gene or list of genes (given by their indices).
 
-        Returns
-        -------
-        torch.Tensor or list[torch.Tensor]
-            The standard deviation parameter of the distribution(s) of the gene(s).
+        Returns:
+            torch.Tensor or list[torch.Tensor]: The standard deviation parameter of the distribution(s) of the gene(s).
 
         """
         raise NotImplementedError
@@ -70,16 +69,12 @@ class BaseGeneModel(abc.ABC, torch.nn.Module):
         Get the inverse dispersion parameter of the distributions of gene.
         The method is used for negative binomial distributions.
 
-        Parameters
-        ----------
-        gene_idx: int or list[int] or None
-            If None, return the inverse dispersion parameter of all genes. Otherwise, return the inverse dispersion parameter
-            of the specified gene or list of genes (given by their indices).
+        Args:
+            gene_idx (int or list[int] or None): If None, return the inverse dispersion parameter of all genes.
+                Otherwise, return the inverse dispersion parameter of the specified gene or list of genes (given by their indices).
 
-        Returns
-        -------
-        torch.Tensor or list[torch.Tensor]
-            The inverse dispersion parameter of the distribution(s) of the gene(s).
+        Returns:
+            torch.Tensor or list[torch.Tensor]: The inverse dispersion parameter of the distribution(s) of the gene(s).
 
         """
         raise NotImplementedError
@@ -89,32 +84,23 @@ class BaseGeneModel(abc.ABC, torch.nn.Module):
         """
         Get the distribution that models the gene expression.
 
-        Parameters
-        ----------
-        gene_idx: int or list[int] or None
-            If None, return the distribution over all genes. Otherwise, return the distribution
-            of the specified gene or list of genes (given by their indices).
+        Args:
+            gene_idx (int or list[int] or None): If None, return the distribution over all genes. Otherwise, return the distribution
+                of the specified gene or list of genes (given by their indices).
 
-        Returns
-        -------
-        dist.Distribution or list[dist.Distribution]
-            The distribution(s) of the gene(s).
+        Returns:
+            dist.Distribution or list[dist.Distribution]: The distribution(s) of the gene(s).
         """
         pass
 
     def loss(self, data) -> torch.Tensor:
         """
         Return the negative log-likelihood of the data given the model.
+        Args:
+            data (torch.Tensor): The observations on which to compute the negative log-likelihood.
 
-        Parameters
-        ----------
-        data: torch.Tensor
-            The observations on which to compute the negative log-likelihood.
-
-        Returns
-        -------
-        torch.Tensor
-            The negative log-likelihood of the data given the model.
+        Returns:
+            torch.Tensor: The negative log-likelihood of the data given the model.
         """
         return -self.get_distribution().log_prob(data).mean()
 
@@ -123,16 +109,11 @@ class BaseGeneModel(abc.ABC, torch.nn.Module):
         Fit the model to the data.
         **NOTE: No need to override this method. It is implemented for you.**
 
-        Parameters
-        ----------
-        adata: AnnData
-            Annotated data matrix.
-        epochs: int
-            Number of epochs to train the model.
-        batch_size: int
-            Batch size.
-        lr: float
-            Learning rate.
+        Args:
+            adata (AnnData): Annotated data matrix.
+            epochs (int): Number of epochs to train the model.
+            batch_size (int): Batch size.
+            lr (float): Learning rate.
         """
         fit(self, adata, epochs=epochs, batch_size=batch_size, lr=lr)
 
@@ -141,16 +122,11 @@ def plot_gene_distribution(model: BaseGeneModel, adata, genes, n_cols=3):
     """
     Plot the learned distributions and the empirical distributions of the genes.
 
-    Parameters
-    ----------
-    model: BaseGeneModel
-        The gene model.
-    adata: AnnData
-        The annotated data matrix.
-    genes: list[str]
-        The list of genes to plot.
-    n_cols: int
-        The number of columns in the plot.
+    Args:
+        model (BaseGeneModel): The gene model.
+        adata (AnnData): The annotated data matrix.
+        genes (list[str]): The list of genes to plot.
+        n_cols (int): The number of columns in the plot.
     """
     n_rows = int(np.ceil(len(genes) / n_cols))
     fig, axs = plt.subplots(n_rows, n_cols, figsize=(n_cols * 4, n_rows * 3), squeeze=False)
