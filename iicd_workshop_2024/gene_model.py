@@ -121,6 +121,7 @@ class BaseGeneModel(abc.ABC, torch.nn.Module):
     def fit(self, adata, epochs=100, batch_size=128, lr=1e-2):
         """
         Fit the model to the data.
+        **NOTE: No need to override this method. It is implemented for you.**
 
         Parameters
         ----------

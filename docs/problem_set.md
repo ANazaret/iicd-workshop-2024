@@ -16,6 +16,8 @@ You will implement simple gene model by subclassing the `BaseGeneModel` class pr
 in the `iicd_workshop_2024` package.
 
 Link to the documentation: [BaseGeneModel](references.md#iicd_workshop_2024.gene_model.BaseGeneModel)
+Note: the instance function `fit` simply calls a helper function, [fit](references.md/#iicd_workshop_2024.inference.fit),
+which loads data from the AnnData object and runs a training loop. This is already implemented for you.
 
 ### 1) Load the data
 
@@ -162,13 +164,14 @@ For this problem, we define:
 - the prior distribution of the cell specific representations $\pi$ to be a standard normal distribution.
 
 We further will use amortized inference to learn the cell specific representations $z_i$.
-$$z_i \approx g(x_i),$$
+$$ z_i \approx g(x_i), $$
 where $g$ is a neural network that takes the gene expression $x_i$ as input and outputs the cell specific representation $z_i$.
 
 ### 1) Implement the auto-encoder model
 
 Implement the auto-encoder model by completing the following class.
-
+You may use the [fit](references.md/#iicd_workshop_2024.inference.fit) function to train the model
+as is done in the [BaseGeneModel](references.md#iicd_workshop_2024.gene_model.BaseGeneModel).
 ```python
 import torch
 

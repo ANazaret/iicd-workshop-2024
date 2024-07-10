@@ -9,3 +9,9 @@
     options:
       show_root_heading: true
       show_root_full_path: false
+
+::: iicd_workshop_2024.inference.fit
+    handler: python
+    options:
+      show_root_heading: true
+      show_root_full_path: false
