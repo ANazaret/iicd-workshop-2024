@@ -16,18 +16,11 @@ class BaseGeneModel(abc.ABC, torch.nn.Module):
 
     Args:
         n_genes (int): The number of genes to model.
-
-    Attributes:
-        _mean (torch.nn.Parameter): The mean parameter for each gene.
-        _std (torch.nn.Parameter): The standard deviation parameter for each gene.
-        _inverse_dispersion (torch.nn.Parameter): The inverse dispersion parameter for each gene.
     """
 
     def __init__(self, n_genes):
         super().__init__()
-        self._mean = torch.nn.Parameter(torch.randn(n_genes))
-        self._std = torch.nn.Parameter(torch.randn(n_genes))
-        self._inverse_dispersion = torch.nn.Parameter(torch.randn(n_genes))
+        self.n_genes = n_genes
 
     @property
     def distribution_name(self):
@@ -35,50 +28,6 @@ class BaseGeneModel(abc.ABC, torch.nn.Module):
         Get the name of the distribution used for modeling the gene expression.
         """
         return self.get_distribution().__class__.__name__.lower()
-
-    def get_mean(self, gene_idx=None) -> torch.Tensor | list[torch.Tensor]:
-        """
-        Get the mean parameter of the distributions of gene.
-        The method is used for Gaussian, Poisson, and negative binomial distributions.
-
-        Args:
-            gene_idx (int or list[int] or None): If None, return the mean parameter of all genes.
-                Otherwise, return the mean parameter of the specified gene or list of genes (given by their indices).
-
-        Returns:
-            torch.Tensor or list[torch.Tensor]: The mean parameter of the distribution(s) of the gene(s).
-        """
-        raise NotImplementedError
-
-    def get_std(self, gene_idx=None) -> torch.Tensor | list[torch.Tensor]:
-        """
-        Get the standard deviation parameter of the distributions of gene.
-        The method is used for Gaussian distributions.
-
-        Args:
-            gene_idx (int or list[int] or None): If None, return the standard deviation parameter of all genes.
-                Otherwise, return the standard deviation parameter of the specified gene or list of genes (given by their indices).
-
-        Returns:
-            torch.Tensor or list[torch.Tensor]: The standard deviation parameter of the distribution(s) of the gene(s).
-
-        """
-        raise NotImplementedError
-
-    def get_inverse_dispersion(self, gene_idx=None) -> torch.Tensor | list[torch.Tensor]:
-        """
-        Get the inverse dispersion parameter of the distributions of gene.
-        The method is used for negative binomial distributions.
-
-        Args:
-            gene_idx (int or list[int] or None): If None, return the inverse dispersion parameter of all genes.
-                Otherwise, return the inverse dispersion parameter of the specified gene or list of genes (given by their indices).
-
-        Returns:
-            torch.Tensor or list[torch.Tensor]: The inverse dispersion parameter of the distribution(s) of the gene(s).
-
-        """
-        raise NotImplementedError
 
     @abc.abstractmethod
     def get_distribution(self, gene_idx=None) -> dist.Distribution:
@@ -97,8 +46,6 @@ class BaseGeneModel(abc.ABC, torch.nn.Module):
     def loss(self, data) -> torch.Tensor:
         """
         Return the negative log-likelihood of the data given the model.
-        Args:
-            data (torch.Tensor): The observations on which to compute the negative log-likelihood.
 
         Returns:
             torch.Tensor: The negative log-likelihood of the data given the model.
@@ -108,7 +55,6 @@ class BaseGeneModel(abc.ABC, torch.nn.Module):
     def fit(self, adata, epochs=100, batch_size=128, lr=1e-2):
         """
         Fit the model to the data.
-        **NOTE: No need to override this method. It is implemented for you.**
 
         Args:
             adata (AnnData): Annotated data matrix.
@@ -140,7 +86,13 @@ def plot_gene_distribution(model: BaseGeneModel, adata, genes, n_cols=3):
             x = torch.arange(0, max_value + 1)
         else:
             x = torch.linspace(
-                min(-5, model.get_mean(gene_idx) - 2 * model.get_std(gene_idx)), max_value, 1000
+                min(
+                    -5,
+                    model.get_distribution(gene_idx).mean.item()
+                    - 2 * model.get_distribution(gene_idx).stddev.item(),
+                ),
+                max_value,
+                200,
             )
         y = model.get_distribution(gene_idx).log_prob(x).exp().detach().numpy()
         sns.lineplot(x=x, y=y, ax=ax, color="red")
