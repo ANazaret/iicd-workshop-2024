@@ -5,6 +5,11 @@ Wednesday, 2024-07-10
 
 In this problem set, we explore probabilistic modeling on scRNA-sequencing data.
 
+Before starting, make sure the `iicd-workshop-2024` package is installed.
+```bash
+pip install iicd-workshop-2024
+```
+
 ## Problem 1 - Simple model with global gene parameters
 
 In this problem, you will implement simple models with global gene parameters.
@@ -187,3 +192,9 @@ class LatentModel(torch.nn.Module):
     def loss(self, data):
         return -self.forward(data).log_prob(data).mean()
 ```
+
+### 2) Fit the auto-encoder model
+You can use the `fit` function from the `iicd_workshop_2024.inference` module to fit the model.
+
+### 3) Visualize the learned cell specific representations using UMAP
+You can use `scanpy` to visualize the learned cell specific representations using UMAP.
