@@ -12,9 +12,10 @@ conda create -n iicd-workshop python=3.11
 conda activate iicd-workshop
 ```
 
-Before starting, make sure the `iicd-workshop-2024` package is installed.
+Before starting, make sure the `iicd-workshop-2024` package is installed, and that you have the
+latest version of it.
 ```bash
-pip install iicd-workshop-2024
+pip install iicd-workshop-2024 --upgrade
 ```
 
 As well as other dependencies:
