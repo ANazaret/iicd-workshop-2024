@@ -193,6 +193,13 @@ class LatentModel(torch.nn.Module):
         return -self.forward(data).log_prob(data).mean()
 ```
 
+You can also use the [DenseNN](references.md/#iicd_workshop_2024.neural_network.DenseNN)
+class from the `iicd_workshop_2024.neural_network` module to define the neural network.
+```python
+from iicd_workshop_2024.neural_network import DenseNN
+```
+
+
 ### 2) Fit the auto-encoder model
 You can use the `fit` function from the `iicd_workshop_2024.inference` module to fit the model.
 
