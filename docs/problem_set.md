@@ -30,12 +30,6 @@ For each cell $i$ and gene $g$, assume that the gene expression $x_{i,g}$ follow
 $$ x_{i,g} \sim p(\theta_g) $$
 where $\theta_g$ contains gene specific parameters shared across cells, and $p$ is a distribution (e.g. Normal, Negative Binomial).
 
-You will implement simple gene model by subclassing the `BaseGeneModel` class provided
-in the `iicd_workshop_2024` package.
-
-Link to the documentation: [BaseGeneModel](references.md#iicd_workshop_2024.gene_model.BaseGeneModel)
-Note: the instance function `fit` simply calls a helper function, [fit](references.md/#iicd_workshop_2024.inference.fit),
-which loads data from the AnnData object and runs a training loop. This is already implemented for you.
 
 ### 1) Load the data
 
@@ -52,44 +46,42 @@ In this question, assume that
 $$ x_{i,g} \sim \mathcal{N}(\mu_g, \sigma_g^2) $$
 where $\mu_g$ and $\sigma_g$ are gene specific parameters shared across cells.
 
-Subclass the `BaseGeneModel` class to implement Normal gene model.
+You will implement simple gene model by subclassing the `BaseGeneModel` class provided
+in the `iicd_workshop_2024` package. Link to the documentation: [BaseGeneModel](references.md#iicd_workshop_2024.gene_model.BaseGeneModel)
+This class already implements the `fit` and `loss` methods for you.
+You just need to implement the `get_distribution` method that returns the distribution of the model,
+as well as the `__init__` method that initializes the model.
 
+Here is a template for the `NormalGeneModel` class:
 ```python
 import torch.distributions as dist
 from iicd_workshop_2024.gene_model import BaseGeneModel
 
 
 class NormalGeneModel(BaseGeneModel):
-    def get_mean(self, gene_idx=None):
-        if gene_idx is None:
-            gene_idx = slice(None)
-        return ...
-
-    def get_std(self, gene_idx=None):
-        if gene_idx is None:
-            gene_idx = slice(None)
-        return ...
+    def __init__(self, n_genes: int):
+        super().__init__(n_genes)
+        # declare any parameters here, using torch.nn.Parameter
+        ...
 
     def get_distribution(self, gene_idx=None) -> dist.Distribution:
+        # return the distribution for the gene_idx-th gene
         return ...
 
 ```
 
-#### 2.1) Implement the `get_mean` method
-Look at the documentation for the [get_mean](references.md#iicd_workshop_2024.gene_model.BaseGeneModel.get_mean) method.
+#### 2.1) Implement the `__init__` and the `get_distribution` methods
 
-#### 2.2) Implement the `get_std` method
+You should use the `dist.Normal` class from `torch.distributions` to create the distribution object.
+Here is the documentation for [torch.distributions](https://pytorch.org/docs/stable/distributions.html).
 
 
-#### 2.3) Implement the `get_distribution` method
+#### 2.2) Fit the model
 
-You should use the `dist.Normal` class from `torch.distributions` to create the distribution.
+Fit the model to the data using the `fit` method of the `NormalGeneModel` class.
+We recommend you to read the documentation and source code for the [fit](references.md/#iicd_workshop_2024.inference.fit) method.
 
-#### 2.4) Fit the model
-
-Fit the model to the data using the `fit` method.
-
-#### 2.5) Visualize the learned means
+#### 2.3) Visualize the learned means
 
 Visualize the learned gene means against the true empirical gene means.
 
@@ -114,9 +106,10 @@ def plot_learned_vs_empirical_mean(model, adata):
     plt.show()
 ```
 
-#### 2.6) Visualize a few gene distributions
+#### 2.4) Visualize a few gene distributions
 
 Visualize a few gene distributions by plotting the learned distributions against the empirical distribution.
+For example, genes: `["CD14", "CD74", "RPS27"]`.
 
 You can use the function `plot_gene_distribution` from the `iicd_workshop_2024.gene_model` module.
 See documentation for [plot_gene_distribution](references.md/#iicd_workshop_2024.gene_model.plot_gene_distribution).
@@ -166,22 +159,10 @@ $$
 x_{i,g} &\sim p(f(z_i), \theta_g)
 \end{align}
 $$
-$$
-\begin{align}
-z_i \sim \pi, \quad \theta_g \sim \rho
-\end{align}
-$$
 where:
+$f$ is a function that transforms the cell specific representation into the gene specific parameters.
 
-- $\pi$ is the prior distribution of the cell specific representations,
-- $\rho$ is the prior distribution of the gene specific parameters
-- $f$ is a function that transforms the cell specific representation into the gene specific parameters.
-
-For this problem, we define:
-
-- the family of distributions $p$ to be negative binomial distributions
-- the prior distribution of the gene specific parameters $\rho$ to be uniform
-- the prior distribution of the cell specific representations $\pi$ to be a standard normal distribution.
+For this problem, we define the family of distributions $p$ to be negative binomial distributions
 
 We further will use amortized inference to learn the cell specific representations $z_i$.
 $$ z_i \approx g(x_i), $$
@@ -201,7 +182,7 @@ class LatentModel(torch.nn.Module):
         super().__init__()
         ...
 
-    def forward(self, x):
+    def get_distribution(self, data):
        ...
 
     def loss(self, data):
@@ -215,7 +196,7 @@ from iicd_workshop_2024.neural_network import DenseNN
 ```
 
 
-### 2) Fit the auto-encoder model
+### 2) Fit the model
 You can use the `fit` function from the `iicd_workshop_2024.inference` module to fit the model.
 
 ### 3) Implement a `get_latent_representation` method
