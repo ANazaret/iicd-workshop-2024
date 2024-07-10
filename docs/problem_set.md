@@ -5,6 +5,8 @@ Wednesday, 2024-07-10
 
 In this problem set, we explore probabilistic modeling on scRNA-sequencing data.
 
+You can find the solutions to this problem set in this notebook: [problem_set_3.ipynb](https://github.com/ANazaret/iicd-workshop-2024/blob/main/problem-set-3.ipynb).
+
 We recommend starting a new conda environment for this problem set.
 ```bash
 
