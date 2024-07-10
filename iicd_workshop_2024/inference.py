@@ -8,7 +8,7 @@ def fit(model, adata, epochs=100, batch_size=128, lr=1e-2):
     Fit the model to the data.
 
     Args:
-        model: The model to fit.
+        model (nn.Module): The model to fit.
         adata (AnnData): The annotated data matrix.
         epochs (int): Number of epochs to train the model.
         batch_size (int): Batch size.

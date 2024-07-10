@@ -36,7 +36,7 @@ class BaseGeneModel(abc.ABC, torch.nn.Module):
         """
         return self.get_distribution().__class__.__name__.lower()
 
-    def get_mean(self, gene_idx=None):
+    def get_mean(self, gene_idx=None) -> torch.Tensor | list[torch.Tensor]:
         """
         Get the mean parameter of the distributions of gene.
         The method is used for Gaussian, Poisson, and negative binomial distributions.
@@ -49,7 +49,7 @@ class BaseGeneModel(abc.ABC, torch.nn.Module):
         """
         raise NotImplementedError
 
-    def get_std(self, gene_idx=None):
+    def get_std(self, gene_idx=None) -> torch.Tensor | list[torch.Tensor]:
         """
         Get the standard deviation parameter of the distributions of gene.
         The method is used for Gaussian distributions.
@@ -64,7 +64,7 @@ class BaseGeneModel(abc.ABC, torch.nn.Module):
         """
         raise NotImplementedError
 
-    def get_inverse_dispersion(self, gene_idx=None):
+    def get_inverse_dispersion(self, gene_idx=None) -> torch.Tensor | list[torch.Tensor]:
         """
         Get the inverse dispersion parameter of the distributions of gene.
         The method is used for negative binomial distributions.
