@@ -40,6 +40,7 @@ class BaseGeneModel(abc.ABC, torch.nn.Module):
         """
         Get the mean parameter of the distributions of gene.
         The method is used for Gaussian, Poisson, and negative binomial distributions.
+
         Args:
             gene_idx (int or list[int] or None): If None, return the mean parameter of all genes.
                 Otherwise, return the mean parameter of the specified gene or list of genes (given by their indices).

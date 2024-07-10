@@ -5,10 +5,23 @@ Wednesday, 2024-07-10
 
 In this problem set, we explore probabilistic modeling on scRNA-sequencing data.
 
+We recommend starting a new conda environment for this problem set.
+```bash
+
+conda create -n iicd-workshop python=3.11
+conda activate iicd-workshop
+```
+
 Before starting, make sure the `iicd-workshop-2024` package is installed.
 ```bash
 pip install iicd-workshop-2024
 ```
+
+As well as other dependencies:
+```bash
+pip install scvi-tools torch scanpy seaborn matplotlib
+```
+
 
 ## Problem 1 - Simple model with global gene parameters
 
@@ -63,8 +76,10 @@ class NormalGeneModel(BaseGeneModel):
 ```
 
 #### 2.1) Implement the `get_mean` method
+Look at the documentation for the [get_mean](references.md#iicd_workshop_2024.gene_model.BaseGeneModel.get_mean) method.
 
 #### 2.2) Implement the `get_std` method
+
 
 #### 2.3) Implement the `get_distribution` method
 
@@ -213,9 +228,24 @@ Does the latent space appear coherent? Can you validate whether the latent space
 ### 5) Compare against Decipher
 We would now like to see how our simple autoencoder model compares to Decipher.
 
-Follow instructions [here](https://github.com/azizilab/decipher?tab=readme-ov-file#readme) to install Decipher.
+Install `decipher` by running:
+```bash
+pip install scdecipher
+```
+
+Decipher has an API close to `scanpy`, with computational function in `decipher.tl` and plotting functions in `decipher.pl`.
+You can fit a Decipher model to the data using the following code snippet:
+```python
+import decipher as dc
+
+# color by cell type (called 'str_labels' in the pbmc dataset)
+model = dc.tl.decipher_train(adata, plot_every_k_epochs=1, plot_kwargs=dict(color='str_labels'))
+```
+
 You should be able to train the model and retrieve a similar latent representation.
-Visualize this representation and compare it against the one from your autoencoder. How do they differ?
+Visualize this representation and compare it against the one from your autoencoder.
+
+How do they differ?
 
 Optional:
 
