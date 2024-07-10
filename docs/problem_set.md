@@ -197,18 +197,27 @@ class LatentModel(torch.nn.Module):
 You can use the `fit` function from the `iicd_workshop_2024.inference` module to fit the model.
 
 ### 3) Implement a `get_latent_representation` method
-This function should be able to retrieve the latent vectors `z` for any given `x` input. 
+This function should be able to retrieve the latent vectors `z` for any given `x` input.
 
 ### 4) Visualize the learned cell specific representations using UMAP
 You can use `scanpy` to visualize the learned cell specific representations using UMAP.
 Does the latent space appear coherent? Can you validate whether the latent space preserves any prior annotations expected to dominate the signal?
 
 ### 5) Compare against Decipher
-We would now like to see how our simple autoencoder model stacks up against Decipher.
+We would now like to see how our simple autoencoder model compares to Decipher.
 
-Follow instructions [here](https://github.com/azizilab/decipher?tab=readme-ov-file#readme) to install and run Decipher
-on your AnnData object. You should be able to train the model and retrieve a similar latent representation.
+Follow instructions [here](https://github.com/azizilab/decipher?tab=readme-ov-file#readme) to install Decipher.
+You should be able to train the model and retrieve a similar latent representation.
 Visualize this representation and compare it against the one from your autoencoder. How do they differ?
-What are the key issues of the simple autoencoder that are addressed by Decipher?
 
-Optional: Decode a series of points across a data-dense region of the latent representations of the auto-encoder and Decipher. Then, for each gene (or a select few genes), plot the trend in gene expression values corresponding to the series of points. Do they appear smooth or discontinuous? Are there correlations between certain genes? Are there sudden shifts in gene expression that correspond with annotation changes?
+Optional:
+
+- Decode a series of points across a data-dense region of the latent representations of the auto-encoder and Decipher.
+- Then, for each gene (or a select few genes), plot the trend in gene expression values corresponding to the series of points.
+- Do they appear smooth or discontinuous?
+- Are there correlations between certain genes?
+- Are there sudden shifts in gene expression that correspond with annotation changes?
+
+## Problem 3 - Implement your own model
+
+Now you can implement your own model on your own data. Good luck!
