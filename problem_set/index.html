@@ -911,6 +911,10 @@ as is done in the <a href="../references/#iicd_workshop_2024.gene_model.BaseGene
 </span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
 </span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        <span class="k">return</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </span></code></pre></div></p>
+<p>You can also use the <a href="../references/#iicd_workshop_2024.neural_network.DenseNN">DenseNN</a>
+class from the <code>iicd_workshop_2024.neural_network</code> module to define the neural network.
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span> <span class="nn">iicd_workshop_2024.neural_network</span> <span class="kn">import</span> <span class="n">DenseNN</span>
+</span></code></pre></div></p>
 <h3 id="2-fit-the-auto-encoder-model">2) Fit the auto-encoder model<a class="headerlink" href="#2-fit-the-auto-encoder-model" title="Permanent link">&para;</a></h3>
 <p>You can use the <code>fit</code> function from the <code>iicd_workshop_2024.inference</code> module to fit the model.</p>
 <h3 id="3-implement-a-get_latent_representation-method">3) Implement a <code>get_latent_representation</code> method<a class="headerlink" href="#3-implement-a-get_latent_representation-method" title="Permanent link">&para;</a></h3>
