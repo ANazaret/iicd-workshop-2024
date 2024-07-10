@@ -23,16 +23,11 @@ class DenseNN(torch.nn.Module):
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
         Forward pass of the neural network.
+        Args:
+            x (torch.Tensor): The input tensor.
 
-        Parameters
-        ----------
-        x : torch.Tensor
-            The input tensor.
-
-        Returns
-        -------
-        torch.Tensor
-            The output tensor.
+        Returns:
+            torch.Tensor: The output tensor.
         """
         for layer in self.layers[:-1]:
             x = torch.relu(layer(x))
